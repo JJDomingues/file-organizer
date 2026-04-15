@@ -21,15 +21,20 @@ class FileOrganizer:
             file_path = os.path.join(self.folder_path, file_name)
 
             if os.path.isfile(file_path) and not file_name.endswith(".py"):
-                mod_time = os.path.getmtime(file_path)
-                date_str = datetime.fromtimestamp(mod_time).strftime("%Y-%m-%d")
+                try: 
+                    mod_time = os.path.getmtime(file_path)
+                    date_str = datetime.fromtimestamp(mod_time).strftime("%Y-%m-%d")
 
-                dest_folder = os.path.join(self.folder_path, date_str)
-                os.makedirs(dest_folder, exist_ok=True)
+                    dest_folder = os.path.join(self.folder_path, date_str)
+                    os.makedirs(dest_folder, exist_ok=True)
 
-                shutil.move(file_path, os.path.join(dest_folder, file_name))
-                print(f"Moved: {file_name} -> {date_str}/")
-    
+                    shutil.move(file_path, os.path.join(dest_folder, file_name))
+                    print(f"Moved: {file_name} -> {date_str}/")
+                except PermissionError:
+                    print(f"Skipped: {file_name} (no permisson)")
+                except Exception as e:
+                    print(f"Error moving {file_name}: {e}")
+        
 #tesntando 
 organizer = FileOrganizer(".")
 print (organizer)
