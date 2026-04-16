@@ -5,7 +5,7 @@ A Python script that automatically organizes files into folders by date.
 ## 🚀  Features 
 
 - Lists all files in a directory
-- Organizer files into subfolders by modification date (YYYY-MM-DD/`)
+- Organizer files into subfolders by modification date (`YYYY-MM-DD/`)
 - Skips Python source files automatically
 - Handles errors gracefully with try/except 
 
