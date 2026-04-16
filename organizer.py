@@ -1,19 +1,35 @@
 import os
+import shutil
+from datetime import datetime
+
 
 class FileOrganizer:
+    """Organize files by their last modification date.
+
+    Files in ``folder_path`` that are not Python files (do not end with
+    ``.py``) are moved into subfolders named ``YYYY-MM-DD`` based on their
+    modification timestamps.
+    """
+
     def __init__(self, folder_path: str):
+        """Create a new :class:`FileOrganizer`.
+
+        Args:
+            folder_path: Directory whose contents will be organized.
+        """
         self.folder_path = folder_path
         
     def __repr__(self) -> str:
+        """Return a developer-friendly representation of the instance."""
         return f"FileOrganizer(folder='{self.folder_path}')"
     
     def list_files(self) -> list:
+        """List all file and directory entries in ``folder_path``."""
         files = os.listdir(self.folder_path)
         return files
     
     def organizer_by_date(self) -> None:
-        import shutil
-        from datetime import datetime
+        """Move files into date-based folders based on modification time."""
 
         files  = self.list_files()
 
